@@ -4,7 +4,7 @@ export class User {
     name: string;
     mail: string;
     phoneNumber: string;
-    selectedTheme?: Dictionary;
+    selectedTheme?: number;
 
     constructor(name: string, mail: string, phoneNumber: string) {
         this.name = name;

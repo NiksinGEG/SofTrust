@@ -29,11 +29,16 @@ namespace SofTrust.Controllers
           
           if(Validation(user))
           {
-              Contact contact = new Contact(user.name, user.mail, user.phoneNumber);
-              if (!CheckUser(user))
+              Contact contact;
+              if (CheckUser(user))
               {
-                  db.Contacts.Add(contact);
-                  db.SaveChanges();
+                   contact = db.Contacts.First(p => p.name == user.name && p.email == user.mail && p.phoneNumber == user.phoneNumber);
+              }
+              else
+              {
+                   contact = new Contact(user.name, user.mail, user.phoneNumber);
+                   db.Contacts.Add(contact);
+                   db.SaveChanges();
               }
              
               Message msg = new Message(contact, user.selectedTheme, "Test");
@@ -59,7 +64,8 @@ namespace SofTrust.Controllers
       
       private bool CheckUser(User searchUser)
       {
-          return db.Contacts.Any(p => p.email == searchUser.mail && p.phoneNumber == searchUser.phoneNumber);
+          bool flag = db.Contacts.Any(p => p.email == searchUser.mail && p.phoneNumber == searchUser.phoneNumber);
+          return flag;
       }
 
       private bool Validation(User user)

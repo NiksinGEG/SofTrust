@@ -125,7 +125,7 @@
       <div class="field">
         <label>Тема:</label>
         <select  name="themeSelect" id = "themeSelect" [(ngModel)]="user.selectedTheme">
-          <option *ngFor="let dictionary of dictionaries" [ngValue]="dictionary">{{dictionary.theme}}</option>
+          <option *ngFor="let dictionary of dictionaries" [ngValue]="dictionary.id">{{dictionary.theme}}</option>
         </select>
       </div>
 

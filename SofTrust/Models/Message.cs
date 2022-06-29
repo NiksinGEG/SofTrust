@@ -14,10 +14,10 @@ namespace SofTrust.Models
 
         public string message { get; set; }
         public Message() { }
-        public Message(Contact Contact, Dictionary Dictionary, string message)
+        public Message(Contact Contact, int DictionaryId, string message)
         {
             this.Contact = Contact;
-            this.Dictionary = Dictionary;
+            this.DictionaryId = DictionaryId;
             this.message = message;
         }
     }

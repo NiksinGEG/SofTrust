@@ -8,7 +8,7 @@ namespace SofTrust.Models
         public string name { get; set; }
         public string mail { get; set; }
         public string phoneNumber { get; set; }
-        public Dictionary selectedTheme { get; set; }
+        public int selectedTheme { get; set; }
         public User() { }
 
         public User(string name, string mail, string phoneNumber)
