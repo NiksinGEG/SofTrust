@@ -5,10 +5,10 @@
   <title>TestFormSofTrust</title>
   <style>
     form {
-      background-color: rgb(236, 236, 236);
+      background-color: #efefef;
       width: 350px;
-      border-radius: 20px;
-      padding-top: 40px;
+      padding-top: 50px;
+      border-radius: 15px;
     }
 
     div.field {
@@ -20,15 +20,15 @@
     div.alert {
       padding-top: 5px;
       padding-bottom: 5px;
-      width: 298px;
+      width: 332px;
       background-color: #f77d7d;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
     }
 
     select {
-      width: 177px;
-      height: 21px;
+      width: 209px;
+      height: 29px;
     }
 
     .customText {
@@ -43,9 +43,7 @@
     }
 
     .box {
-      width: 350px;
-      border: 1px solid #ddd;
-      height: 200px;
+      width: 380px;
       position: relative;
       margin: 0 auto;
       background: #efefef;
@@ -131,12 +129,15 @@
 
       <div class="field">
         <label>Ваш телефон:</label>
-        <input type="text"
-               placeholder="+78005553535"
-               required pattern="^((\+7|7|8)+([0-9]){10})$"
-               name="phoneNumber"
-               #phoneNumber="ngModel"
-               [(ngModel)]="user.phoneNumber" />
+        <div class="inputWithIcon">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <input type="text"
+                 placeholder="+78005553535"
+                 required pattern="^((\+7|7|8)+([0-9]){10})$"
+                 name="phoneNumber"
+                 #phoneNumber="ngModel"
+                 [(ngModel)]="user.phoneNumber" />
+        </div>
         <div style="text-align: center;" [hidden]="phoneNumber.valid || phoneNumber.untouched" class="alert">
           Некорректный номер телефона
         </div>
@@ -144,13 +145,19 @@
 
       <div class="field">
         <label>Тема:</label>
-        <select name="themeSelect" id="themeSelect" [(ngModel)]="user.selectedTheme">
+        <select name="themeSelect"
+                id="themeSelect"
+                [(ngModel)]="user.selectedTheme"
+                #themeSelect="ngModel">
           <option *ngFor="let dictionary of dictionaries" [ngValue]="dictionary.id">{{dictionary.theme}}</option>
         </select>
+        <div style="text-align: center;" [hidden]="themeSelect.untouched" class="alert">
+          Выберите тему
+        </div>
       </div>
 
       <div>
-        <button [disabled]="name.invalid || email.invalid || phoneNumber.invalid"
+        <button [disabled]="name.invalid || email.invalid || phoneNumber.invalid || themeSelect.invalid"
                 class="btn" (click)="PostUser()">
           Отправить письмо
         </button>
