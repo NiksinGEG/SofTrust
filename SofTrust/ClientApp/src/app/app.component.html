@@ -75,6 +75,18 @@
         border-top: 10px solid #c8c8c8;
       }
 
+      .inputWithIcon input[type = text]{
+          padding-left: 22px;
+      }
+
+      .inputWithIcon{
+          position: relative;
+      }
+      .inputWithIcon i{
+          position: absolute;
+          padding: 6px;
+          
+      }
     #name {
       background-color: white;
     }
@@ -85,13 +97,18 @@
   <div class="box">
     <div class="ribbon"><div class="customText">Напишите нам</div></div>
     <form action="" method="post">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <div class="field">
         <label>Ваше имя:</label>
-        <input type="text"
-               required
-               name="username"
-               #name="ngModel"
-               [(ngModel)]="user.name" />
+        <div class="inputWithIcon">
+          <i class="fa fa-address-book-o" aria-hidden="true"></i>
+          <input type="text"
+                 required
+                 name="username"
+                 #name="ngModel"
+                 [(ngModel)]="user.name" />
+        </div>
+
         <div style="text-align: center;" [hidden]="name.valid || name.untouched" class="alert">
           Поле не может быть пустым
         </div>
@@ -99,11 +116,14 @@
 
       <div class="field">
         <label>Ваш Email:</label>
-        <input type="email"
-               name="eMail"
-               #email="ngModel"
-               required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-               [(ngModel)]="user.mail" />
+        <div class="inputWithIcon">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          <input type="text"
+                 name="eMail"
+                 #email="ngModel"
+                 required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                 [(ngModel)]="user.mail" />
+        </div>
         <div style="text-align: center;" [hidden]="email.valid || email.untouched" class="alert">
           Некорректный Email
         </div>
@@ -124,7 +144,7 @@
 
       <div class="field">
         <label>Тема:</label>
-        <select  name="themeSelect" id = "themeSelect" [(ngModel)]="user.selectedTheme">
+        <select name="themeSelect" id="themeSelect" [(ngModel)]="user.selectedTheme">
           <option *ngFor="let dictionary of dictionaries" [ngValue]="dictionary.id">{{dictionary.theme}}</option>
         </select>
       </div>
