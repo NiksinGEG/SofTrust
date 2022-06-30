@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer("Server=DESKTOP-ONP6D98;Database=SofTrust;Trusted_Connection=True;"));
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer("workstation id=SofTrustDB.mssql.somee.com;packet size=4096;user id=NiksinGeG_SQLLogin_1;pwd=dzr5xqxex9;data source=SofTrustDB.mssql.somee.com;persist security info=False;initial catalog=SofTrustDB"));
 
 builder.Services.AddControllersWithViews();
 

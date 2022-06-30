@@ -17,18 +17,36 @@
       padding-left: 20px;
     }
 
-    div.alert {
+    div.message {
       padding-top: 5px;
       padding-bottom: 5px;
-      width: 332px;
-      background-color: #f77d7d;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
+      padding-left: 20px;
     }
+
+    div.message label {
+      display: block;
+      float: left;
+      width: 120px;
+      height: 15px;
+    }
+
+      div.message textarea{
+        height: 100px;
+      }
+
+      div.alert {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 332px;
+        background-color: #f77d7d;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
 
     select {
       width: 209px;
       height: 29px;
+      border-radius: 5px;
     }
 
     .customText {
@@ -75,7 +93,14 @@
 
       .inputWithIcon input[type = text]{
           padding-left: 22px;
+          border-radius: 5px;
       }
+
+
+    .textareaMsg textarea {
+      width:210px;
+      border-radius: 5px;
+    }
 
       .inputWithIcon{
           position: relative;
@@ -92,7 +117,7 @@
 </head>
 <body>
 
-  <div class="box">
+  <div class="box" *ngIf="!done">
     <div class="ribbon"><div class="customText">Напишите нам</div></div>
     <form action="" method="post">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -146,23 +171,50 @@
       <div class="field">
         <label>Тема:</label>
         <select name="themeSelect"
+                required
                 id="themeSelect"
                 [(ngModel)]="user.selectedTheme"
                 #themeSelect="ngModel">
           <option *ngFor="let dictionary of dictionaries" [ngValue]="dictionary.id">{{dictionary.theme}}</option>
         </select>
-        <div style="text-align: center;" [hidden]="themeSelect.untouched" class="alert">
+        <div style="text-align: center;" [hidden]="themeSelect.valid || themeSelect.untouched" class="alert">
           Выберите тему
         </div>
       </div>
 
+      <div class="message">
+        <label>Ваше сообщение:</label>
+        <div class="textareaMsg">
+          <textarea
+                 required
+                 name="#message"
+                 #message="ngModel"
+                 [(ngModel)]="user.message">
+          </textarea>
+
+        </div>
+
+        <div style="text-align: center;" [hidden]="message.valid || message.untouched" class="alert">
+          Поле не может быть пустым
+        </div>
+      </div>
+
       <div>
-        <button [disabled]="name.invalid || email.invalid || phoneNumber.invalid || themeSelect.invalid"
+        <button [disabled]="name.invalid || email.invalid || phoneNumber.invalid || themeSelect.invalid || message.invalid"
                 class="btn" (click)="PostUser()">
           Отправить письмо
         </button>
       </div>
+
     </form>
+  </div>
+  <div *ngIf="done">
+    <div>Получено от сервера</div>
+    <div>Имя: {{receivedUser.contact.name}}</div>
+    <div>Почта: {{receivedUser.contact.email}}</div>
+    <div>Номер телеофна: {{receivedUser.contact.phoneNumber}}</div>
+    <div>Выбранная тема: {{receivedUser.dictionaryId}}</div>
+    <div>Сообщение: {{receivedUser.message}}</div>
   </div>
 
 </body>

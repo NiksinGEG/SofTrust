@@ -24,9 +24,8 @@ namespace SofTrust.Controllers
           }
 
       [HttpPost]
-      public User Post(User user)
+      public Message Post(User user)
       {
-          
           if(Validation(user))
           {
               Contact contact;
@@ -40,12 +39,12 @@ namespace SofTrust.Controllers
                    db.Contacts.Add(contact);
                    db.SaveChanges();
               }
-             
-              Message msg = new Message(contact, user.selectedTheme, "Test");
+              Message msg = new Message(contact, user.selectedTheme, user.message);
               db.Messages.Add(msg);
               db.SaveChanges();
+              return msg;
           }
-          return user;
+          return null;
       }
 
       [HttpGet]
@@ -55,12 +54,20 @@ namespace SofTrust.Controllers
         return tmp;
       }
 
-      /*[Route("/saveduser")]
+      [Route("/saveduser")]
       [HttpGet]
-      public User GetSavedUser(int id)
+      public User GetSavedUser()
       {
-            
-      }*/
+            User infoUser = new User();
+            List<Message> tmp = db.Messages.ToList();
+            Message msg = tmp[tmp.Count - 1];
+            infoUser.name = msg.Contact.name;
+            infoUser.mail = msg.Contact.email;
+            infoUser.phoneNumber = msg.Contact.phoneNumber;
+            infoUser.selectedTheme = msg.DictionaryId;
+            infoUser.message = msg.message;
+            return infoUser;
+      }
       
       private bool CheckUser(User searchUser)
       {
