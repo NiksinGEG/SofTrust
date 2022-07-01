@@ -9,13 +9,13 @@ export class HttpService {
 
   postData(user: User) {
     return this.http.post(
-      '/api/user' ,
+      'https://SofTrust.somee.com/publish/api/user' ,
       user
     )
   }
 
   getData() {
     return this.http.get<Dictionary[]>(
-      '/api/user',)
+      'https://SofTrust.somee.com/publish/api/user',)
   }
 }
