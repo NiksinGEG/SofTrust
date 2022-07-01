@@ -24,7 +24,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
 
-app.MapControllerRoute(
+app.MapControllerRoute(Сидя
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 

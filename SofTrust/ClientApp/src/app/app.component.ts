@@ -3,6 +3,7 @@ import { User } from 'src/Models/user';
 import { HttpService } from 'src/app/http.service';
 import { Dictionary } from '../Models/theme';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -15,15 +16,19 @@ export class AppComponent implements OnInit {
   user: User = new User("", "", "", "");
   dictionaries: Dictionary[] = [];
   receivedUser: any;
-
+  useGlobalDomain: boolean = false;
   done: boolean = false;
+  showButton: boolean = false;
+  mainForm?: any;
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
     this.GetThemes();
   }
 
-
+  handleSuccess(){
+    this.showButton = true;
+  }
 
   GetThemes() {
     this.httpService.getData()
